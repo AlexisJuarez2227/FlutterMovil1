@@ -1,7 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 class DashboardView extends StatelessWidget {
-  const DashboardView({super.key});
+  const DashboardView({Key? key}) : super(key: key);
+
+  Future<void> fetchData() async {
+    var url = Uri.parse('http://3.225.81.121:3000/gastos/getAll');
+    var response = await http.get(url);
+
+    if (response.statusCode == 200) {
+      print(response.body); // Aquí puedes manejar la respuesta según tus necesidades
+    } else {
+      print('Failed to fetch data: ${response.reasonPhrase}');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
